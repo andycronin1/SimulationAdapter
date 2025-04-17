@@ -5,7 +5,6 @@
 #include <memory>
 #include <iostream> 
 #include "appInterface.h"
-#include "Bullet3Base.h"
 #include "btBulletDynamicsCommon.h"
 #include <stdio.h>
 
@@ -18,10 +17,10 @@ class Bullet3Adapter : public AppInterface {
         Bullet3Adapter(btDiscreteDynamicsWorld* c) : client{c} {}
 
         // Override the app method with the clients make rigid body method 
-        virtual void createBoxRigidBody() override {
+        virtual void createBoxRigidBody(double& x, double& y, double& z) override {
 
         // 1. Shape: Define the collision shape of the rigid body
-        std::unique_ptr<btCollisionShape> groundShape = std::make_unique<btBoxShape>(btVector3(50., 50., 50.)); 
+        std::unique_ptr<btCollisionShape> groundShape = std::make_unique<btBoxShape>(btVector3(x, y, z)); 
 
         // 2. Motion State:
         std::unique_ptr<btDefaultMotionState> groundMotionState = std::make_unique<btDefaultMotionState>(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -56, 0))); 
@@ -75,8 +74,12 @@ int main() {
     // Create adapters
     auto bullet3Adapter = std::make_unique<Bullet3Adapter>(bulletSim.get());
 
+    double x = 50.;
+    double y = 50.;
+    double z = 50.;
+
     // Run simulations
-    bullet3Adapter->createBoxRigidBody();
+    bullet3Adapter->createBoxRigidBody(x, y, z);
 
     // std::cout << "Tank Sim Data Returned: " << data1 << std::endl;
     // std::cout << "Solider Sim Data Return: " << data2 << std::endl;

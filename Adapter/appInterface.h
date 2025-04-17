@@ -5,7 +5,7 @@
 class AppInterface 
 {
     public: 
-        virtual void createBoxRigidBody() = 0; //pure virtual function
+        virtual void createBoxRigidBody(double& x, double& y, double& z) = 0; //pure virtual function
     
 }; 
 
@@ -14,7 +14,7 @@ class AppObject : public AppInterface
 {
     public: 
     // Methods to do something in the app. Virtual so that they can be overridden by the adapter 
-        virtual void createBoxRigidBody() override {}
+        virtual void createBoxRigidBody(double& x, double& y, double& z) override {}
 
 }; 
 
