@@ -1,11 +1,24 @@
+
 cmake_minimum_required(VERSION 3.5)
+
 project(cmakeAdapter VERSION 0.1.0 LANGUAGES C CXX)
 
-add_executable(cmakeAdapter main.cpp)
+find_package(Bullet REQUIRED)
 
-include_directories(${CMAKE_SOURCE_DIR}/bullet3/src)
-target_link_libraries(cmakeAdapter Bullet3Collision Bullet3Common Bullet3Dynamics Bullet3LinearMath Bullet3Geometry BulletDynamics)
+message(STATUS "BULLET_FOUND: ${BULLET_FOUND}")
+message(STATUS "BULLET_INCLUDE_DIRS: ${BULLET_INCLUDE_DIRS}")
+message(STATUS "BULLET_LIBRARIES: ${BULLET_LIBRARIES}")
 
-include(CTest)
-enable_testing()
+execute_process(COMMAND ls -l ${BULLET_INCLUDE_DIRS}/LinearMath/btVector3.h OUTPUT_VARIABLE FILE_INFO)
+message(STATUS "File Info: ${FILE_INFO}")
 
+add_executable(myAdapter main.cpp)
+
+# Be explicit about including the LinearMath directory
+target_include_directories(myAdapter PRIVATE
+    ${BULLET_INCLUDE_DIRS}
+)
+
+message(STATUS "BULLET_LIBRARIES: ${BULLET_LIBRARIES}")
+
+target_link_libraries(myAdapter PRIVATE ${BULLET_LIBRARIES})

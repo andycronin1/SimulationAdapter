@@ -5,7 +5,7 @@
 #include <memory>
 #include <iostream> 
 #include "appInterface.h"
-#include "btBulletDynamicsCommon.h"
+#include <bullet/btBulletDynamicsCommon.h>
 #include <stdio.h>
 
 // Bullet3 Adapter
@@ -20,10 +20,10 @@ class Bullet3Adapter : public AppInterface {
         virtual void createBoxRigidBody(double& x, double& y, double& z) override {
 
         // 1. Shape: Define the collision shape of the rigid body
-        std::unique_ptr<btCollisionShape> groundShape = std::make_unique<btBoxShape>(btVector3(x, y, z)); 
+        std::shared_ptr<btCollisionShape> groundShape = std::make_shared<btBoxShape>(btVector3(x, y, z)); 
 
         // 2. Motion State:
-        std::unique_ptr<btDefaultMotionState> groundMotionState = std::make_unique<btDefaultMotionState>(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -56, 0))); 
+        std::shared_ptr<btDefaultMotionState> groundMotionState = std::make_shared<btDefaultMotionState>(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -56, 0))); 
 
         // 3. Mass and Inertia: Set physical properties (0 mass for static objects)
         btScalar mass = 0; // Mass in kilograms (0 for static ground)
@@ -40,14 +40,18 @@ class Bullet3Adapter : public AppInterface {
             inertia
         );
 
-        // 5. Create the Rigid Body:
-        std::unique_ptr<btRigidBody> groundRigidBody = std::make_unique<btRigidBody>(groundRigidBodyCI);
+        // Use a raw pointer here; btDiscreteDynamicsWorld manages the rigid body's lifetime
+        btRigidBody* groundRigidBody = new btRigidBody(groundRigidBodyCI); 
+
+        std::cout << "Attempting to create rigid body";
 
         // 6. Add to the Simulation World:
-        client->addRigidBody(groundRigidBody.get()); // Pass raw pointer to Bullet
+        client->addRigidBody(groundRigidBody); // Pass raw pointer to Bullet
 
         // When we call the local app method, we are actually calling the simulation
         // virtual void appMethod(int& data) override { obj->simMethod(data); }
+        
+        std::cout << "Succesfully ran the rigid body function";
 
          }
 
@@ -57,10 +61,10 @@ class Bullet3Adapter : public AppInterface {
         // Initialise pointers
         btDiscreteDynamicsWorld* client = nullptr;
 
-        int transformData(int input) {
-            // Complex transformation logic here
-            // Example
-        }
+        // int transformData(int input) {
+        //     // Complex transformation logic here
+        //     // Example
+        // }
 
     };
 
@@ -68,9 +72,17 @@ int main() {
     
     // ---- May need to set up a simulation here first ----
 
-    // Create simulations and their pointers 
-    std::unique_ptr<btDiscreteDynamicsWorld> bulletSim = std::make_unique<btDiscreteDynamicsWorld>();
+    // 1. Create the necessary components:
+    btDefaultCollisionConfiguration* collisionConfiguration = new btDefaultCollisionConfiguration();
+    btCollisionDispatcher* dispatcher = new btCollisionDispatcher(collisionConfiguration);
+    btDbvtBroadphase* overlappingPairCache = new btDbvtBroadphase();
+    btSequentialImpulseConstraintSolver* solver = new btSequentialImpulseConstraintSolver;
 
+    // 2. Create btDiscreteDynamicsWorld using the components:  CORRECT WAY
+    std::unique_ptr<btDiscreteDynamicsWorld> bulletSim(new btDiscreteDynamicsWorld(
+        dispatcher, overlappingPairCache, solver, collisionConfiguration
+    ));
+    
     // Create adapters
     auto bullet3Adapter = std::make_unique<Bullet3Adapter>(bulletSim.get());
 
@@ -83,6 +95,13 @@ int main() {
 
     // std::cout << "Tank Sim Data Returned: " << data1 << std::endl;
     // std::cout << "Solider Sim Data Return: " << data2 << std::endl;
+
+    // 3. Important: Clean up (reverse order of creation)
+    delete bulletSim.release(); // Release ownership before deleting underlying pointers
+    delete solver;
+    delete overlappingPairCache;
+    delete dispatcher;
+    delete collisionConfiguration;
 
     return 0;
 }
