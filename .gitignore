@@ -45,4 +45,4 @@ CMakeUserPresets.json
 *.app
 
 #Annoyances 
-*.DS_Store
+.DS_Store
