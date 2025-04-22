@@ -44,5 +44,8 @@ CMakeUserPresets.json
 *.out
 *.app
 
-#Annoyances 
-.DS_Store
+# OS generated files #
+######################
+client/.DS_Store
+## This one might be better
+# **/.DS_Store
