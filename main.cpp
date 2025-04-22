@@ -20,6 +20,13 @@ int main() {
     // Create the dynamics world using a shared_ptr
     auto bulletSim = std::make_shared<btDiscreteDynamicsWorld>(dispatcher.get(), overlappingPairCache.get(), solver.get(), collisionConfiguration.get());
 
+    // 2. Set the gravity for the simulation
+    bulletSim->setGravity(btVector3(0, -10, 0));
+
+    //keep track of the shapes, we release memory at exit.
+	//make sure to re-use collision shapes among rigid bodies whenever possible!
+    btAlignedObjectArray<btCollisionShape*> collisionShapes;
+
     // ------/Simulation created/-----  //
     
     // Create adapters
@@ -34,7 +41,12 @@ int main() {
 
     // Create Box 
     bullet3Adapter->createBoxRigidBody(bulletSim, x, y, z);
-    
+
+    // Create Second identical Box 
+    bullet3Adapter->createBoxRigidBody(bulletSim, x, y, z);
+
+    bullet3Adapter->showObjectPositions(bulletSim);
+
     return 0;
 }
 

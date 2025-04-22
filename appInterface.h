@@ -7,8 +7,9 @@ class AppInterface
     public: 
     
 
-        virtual void testSim(const std::shared_ptr<btDiscreteDynamicsWorld>& world) = 0; 
-        virtual void createBoxRigidBody(const std::shared_ptr<btDiscreteDynamicsWorld>& sim, double& x, double& y, double& z) = 0; //pure virtual function
+        virtual void testSim(const std::shared_ptr<btDiscreteDynamicsWorld>& sim) = 0; 
+        virtual void createBoxRigidBody(std::shared_ptr<btDiscreteDynamicsWorld>& sim, double& x, double& y, double& z) = 0; //pure virtual function
+        virtual void showObjectPositions(std::shared_ptr<btDiscreteDynamicsWorld>& sim) = 0; 
     
 }; 
 
@@ -22,7 +23,9 @@ class AppObject : public AppInterface
         virtual void testSim(const std::shared_ptr<btDiscreteDynamicsWorld>& world) override {}    
 
         // Method to create box rigid body
-        virtual void createBoxRigidBody(const std::shared_ptr<btDiscreteDynamicsWorld>& sim, double& x, double& y, double& z) override {}
+        virtual void createBoxRigidBody(std::shared_ptr<btDiscreteDynamicsWorld>& sim, double& x, double& y, double& z) override {}
+
+        virtual void showObjectPositions(std::shared_ptr<btDiscreteDynamicsWorld>& sim) override {}
 
 }; 
 

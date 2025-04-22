@@ -14,14 +14,16 @@ class Bullet3Adapter : public AppInterface {
         
 
         // Defining virtual function to be overridden from app interface 
-        virtual void testSim(const std::shared_ptr<btDiscreteDynamicsWorld>& world) override;
+        virtual void testSim(const std::shared_ptr<btDiscreteDynamicsWorld>& sim) override;
 
         // Defining virtual function to be overridden from app interface 
-        virtual void createBoxRigidBody(const std::shared_ptr<btDiscreteDynamicsWorld>& sim, double& x, double& y, double& z) override;
+        virtual void createBoxRigidBody(std::shared_ptr<btDiscreteDynamicsWorld>& sim, double& x, double& y, double& z) override;
+
+        virtual void showObjectPositions(std::shared_ptr<btDiscreteDynamicsWorld>& sim) override;
 
     private:
         // Initialise member variables  
-        std::unique_ptr<btDiscreteDynamicsWorld> simworld = nullptr;
+        std::unique_ptr<btDiscreteDynamicsWorld> sim = nullptr;
         std::vector<std::unique_ptr<btRigidBody>> rigidBodies_;
 
 };
