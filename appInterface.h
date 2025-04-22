@@ -7,8 +7,11 @@ class AppInterface
     public: 
     
 
-        virtual void testSim(const std::shared_ptr<btDiscreteDynamicsWorld>& world) = 0; 
-        virtual void createBoxRigidBody(const std::shared_ptr<btDiscreteDynamicsWorld>& sim, double& x, double& y, double& z) = 0; //pure virtual function
+        virtual void testSim() = 0; 
+        virtual void createBoxRigidBody(double& x, double& y, double& z) = 0; //pure virtual function
+        virtual void showObjectPositions() = 0; 
+        virtual void applyForce(int x, int y, int z, int object_num) = 0; 
+        
     
 }; 
 
@@ -19,10 +22,14 @@ class AppObject : public AppInterface
     // Methods to do something in the app. Virtual so that they can be overridden by the adapter 
 
         // Methods to do something in the app. Virtual so that they can be overridden by the adapter 
-        virtual void testSim(const std::shared_ptr<btDiscreteDynamicsWorld>& world) override {}    
+        virtual void testSim() override {}    
 
         // Method to create box rigid body
-        virtual void createBoxRigidBody(const std::shared_ptr<btDiscreteDynamicsWorld>& sim, double& x, double& y, double& z) override {}
+        virtual void createBoxRigidBody(double& x, double& y, double& z) override {}
+
+        virtual void showObjectPositions() override {}
+
+        virtual void applyForce(int x, int y, int z, int object_num) override {}
 
 }; 
 
