@@ -45,6 +45,20 @@ int main() {
     // Create Second identical Box 
     bullet3Adapter->createBoxRigidBody(bulletSim, x, y, z);
 
+    // Show positions
+    bullet3Adapter->showObjectPositions(bulletSim);
+
+    // Set a force vector 
+    int force_x = 10;
+    int force_y = 0; 
+    int force_z = 0;
+
+    // Select which object to apply force to
+    int object_num = 0;
+
+    // apply force to specific object
+    bullet3Adapter->applyForce(bulletSim, force_x, force_y, force_z, object_num);
+
     bullet3Adapter->showObjectPositions(bulletSim);
 
     return 0;

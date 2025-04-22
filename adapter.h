@@ -19,7 +19,11 @@ class Bullet3Adapter : public AppInterface {
         // Defining virtual function to be overridden from app interface 
         virtual void createBoxRigidBody(std::shared_ptr<btDiscreteDynamicsWorld>& sim, double& x, double& y, double& z) override;
 
+        // Function to show object positions
         virtual void showObjectPositions(std::shared_ptr<btDiscreteDynamicsWorld>& sim) override;
+
+        // Function to apply force to the rigid body
+        virtual void applyForce(std::shared_ptr<btDiscreteDynamicsWorld>& sim, int x, int y, int z, int object_num) override;
 
     private:
         // Initialise member variables  

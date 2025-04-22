@@ -83,4 +83,17 @@ void Bullet3Adapter::showObjectPositions(std::shared_ptr<btDiscreteDynamicsWorld
 
 }
 
+// Function to apply force to the rigid body
+void Bullet3Adapter::applyForce(std::shared_ptr<btDiscreteDynamicsWorld>& sim, int x, int y, int z, int object_num) {
+    // Move the first object by applying a central force
+    btRigidBody* body = sim->getCollisionObjectArray()[0]->getInternalType() == btCollisionObject::CO_RIGID_BODY
+        ? btRigidBody::upcast(sim->getCollisionObjectArray()[0])
+        : nullptr;
+
+    if (body) {
+        body->applyCentralForce(btVector3(x, y, z)); // Apply a force to move the object
+        std::cout << "Applied force to the first object.\n";
+    }
+}
+
     
