@@ -12,41 +12,41 @@ int main() {
     // -----/Set up the simulation/------ //
 
     // 1. Create the necessary components:
-    std::unique_ptr<btDefaultCollisionConfiguration> collisionConfiguration(new btDefaultCollisionConfiguration());
-    std::unique_ptr<btCollisionDispatcher> dispatcher(new btCollisionDispatcher(collisionConfiguration.get()));
-    std::unique_ptr<btDbvtBroadphase> overlappingPairCache(new btDbvtBroadphase());
-    std::unique_ptr<btSequentialImpulseConstraintSolver> solver(new btSequentialImpulseConstraintSolver);
+    auto collisionConfiguration = std::make_shared<btDefaultCollisionConfiguration>();
+    auto dispatcher = std::make_shared<btCollisionDispatcher>(collisionConfiguration.get());
+    auto overlappingPairCache = std::make_shared<btDbvtBroadphase>();
+    auto solver = std::make_shared<btSequentialImpulseConstraintSolver>();
 
-    // Create the dynamics world using a shared_ptr
+    // Create the dynamics world using shared_ptrs to ensure proper lifetime management
     auto bulletSim = std::make_shared<btDiscreteDynamicsWorld>(dispatcher.get(), overlappingPairCache.get(), solver.get(), collisionConfiguration.get());
 
     // 2. Set the gravity for the simulation
     bulletSim->setGravity(btVector3(0, -10, 0));
 
-    //keep track of the shapes, we release memory at exit.
-	//make sure to re-use collision shapes among rigid bodies whenever possible!
-    btAlignedObjectArray<btCollisionShape*> collisionShapes;
+    // //keep track of the shapes, we release memory at exit.
+	// //make sure to re-use collision shapes among rigid bodies whenever possible!
+    // btAlignedObjectArray<btCollisionShape*> collisionShapes;
 
     // ------/Simulation created/-----  //
     
     // Create adapters
-    auto bullet3Adapter = std::make_unique<Bullet3Adapter>();
+    auto bullet3Adapter = std::make_shared<Bullet3Adapter>(bulletSim);
 
     double x = 50.;
     double y = 50.;
     double z = 50.;
 
     // Start sim
-    bullet3Adapter->testSim(bulletSim);
+    bullet3Adapter->testSim();
 
     // Create Box 
-    bullet3Adapter->createBoxRigidBody(bulletSim, x, y, z);
+    bullet3Adapter->createBoxRigidBody(x, y, z);
 
     // Create Second identical Box 
-    bullet3Adapter->createBoxRigidBody(bulletSim, x, y, z);
+    bullet3Adapter->createBoxRigidBody(x, y, z);
 
     // Show positions
-    bullet3Adapter->showObjectPositions(bulletSim);
+    bullet3Adapter->showObjectPositions();
 
     // Set a force vector 
     int force_x = 10;
@@ -57,9 +57,13 @@ int main() {
     int object_num = 0;
 
     // apply force to specific object
-    bullet3Adapter->applyForce(bulletSim, force_x, force_y, force_z, object_num);
+    // WE NEED TO STEP THROUGH THE SIMULATION FOR THIS FORCE TO HAVE ANY EFFECT 
+    bullet3Adapter->applyForce(force_x, force_y, force_z, object_num);
 
-    bullet3Adapter->showObjectPositions(bulletSim);
+    // // step through simulation 
+    // bulletSim->stepSimulation(0.1);
+
+    bullet3Adapter->showObjectPositions();
 
     return 0;
 }
