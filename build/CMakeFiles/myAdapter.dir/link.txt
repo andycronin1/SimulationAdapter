@@ -1,1 +1,0 @@
-/usr/bin/c++  -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/myAdapter.dir/main.cpp.o CMakeFiles/myAdapter.dir/adapter.cpp.o -o myAdapter  /usr/local/lib/libBulletDynamics.a /usr/local/lib/libBulletCollision.a /usr/local/lib/libLinearMath.a /usr/local/lib/libBulletSoftBody.a
