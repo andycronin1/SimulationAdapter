@@ -1,0 +1,3 @@
+/Users/ajcronin/cppProjects/cmakeAdapter/Adapter/out/build/clangPreset/CMakeFiles/myAdapter.dir
+/Users/ajcronin/cppProjects/cmakeAdapter/Adapter/out/build/clangPreset/CMakeFiles/edit_cache.dir
+/Users/ajcronin/cppProjects/cmakeAdapter/Adapter/out/build/clangPreset/CMakeFiles/rebuild_cache.dir

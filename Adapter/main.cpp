@@ -43,15 +43,12 @@ class Bullet3Adapter : public AppInterface {
         // Use a raw pointer here; btDiscreteDynamicsWorld manages the rigid body's lifetime
         btRigidBody* groundRigidBody = new btRigidBody(groundRigidBodyCI); 
 
-        std::cout << "Attempting to create rigid body";
+        std::cout << "Attempting to create rigid body \n";
 
         // 6. Add to the Simulation World:
         client->addRigidBody(groundRigidBody); // Pass raw pointer to Bullet
-
-        // When we call the local app method, we are actually calling the simulation
-        // virtual void appMethod(int& data) override { obj->simMethod(data); }
         
-        std::cout << "Succesfully ran the rigid body function";
+        std::cout << "Succesfully ran the rigid body function \n";
 
          }
 
