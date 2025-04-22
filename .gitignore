@@ -46,6 +46,7 @@ CMakeUserPresets.json
 
 # OS generated files #
 ######################
-client/.DS_Store
+/.DS_Store
 ## This one might be better
 # **/.DS_Store
+.DS_Store
