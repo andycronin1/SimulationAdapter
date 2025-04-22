@@ -129,6 +129,30 @@ myAdapter/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/myAdapter.dir/build.make CMakeFiles/myAdapter.dir/build
 .PHONY : myAdapter/fast
 
+adapter.o: adapter.cpp.o
+.PHONY : adapter.o
+
+# target to build an object file
+adapter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/myAdapter.dir/build.make CMakeFiles/myAdapter.dir/adapter.cpp.o
+.PHONY : adapter.cpp.o
+
+adapter.i: adapter.cpp.i
+.PHONY : adapter.i
+
+# target to preprocess a source file
+adapter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/myAdapter.dir/build.make CMakeFiles/myAdapter.dir/adapter.cpp.i
+.PHONY : adapter.cpp.i
+
+adapter.s: adapter.cpp.s
+.PHONY : adapter.s
+
+# target to generate assembly for a file
+adapter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/myAdapter.dir/build.make CMakeFiles/myAdapter.dir/adapter.cpp.s
+.PHONY : adapter.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -162,6 +186,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... myAdapter"
+	@echo "... adapter.o"
+	@echo "... adapter.i"
+	@echo "... adapter.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

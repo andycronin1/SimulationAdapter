@@ -5,7 +5,10 @@
 class AppInterface 
 {
     public: 
-        virtual void createBoxRigidBody(double& x, double& y, double& z) = 0; //pure virtual function
+    
+
+        virtual void testSim(const std::shared_ptr<btDiscreteDynamicsWorld>& world) = 0; 
+        virtual void createBoxRigidBody(const std::shared_ptr<btDiscreteDynamicsWorld>& sim, double& x, double& y, double& z) = 0; //pure virtual function
     
 }; 
 
@@ -14,11 +17,12 @@ class AppObject : public AppInterface
 {
     public: 
     // Methods to do something in the app. Virtual so that they can be overridden by the adapter 
-        virtual void createBoxRigidBody(double& x, double& y, double& z) override {}
+
+        // Methods to do something in the app. Virtual so that they can be overridden by the adapter 
+        virtual void testSim(const std::shared_ptr<btDiscreteDynamicsWorld>& world) override {}    
+
+        // Method to create box rigid body
+        virtual void createBoxRigidBody(const std::shared_ptr<btDiscreteDynamicsWorld>& sim, double& x, double& y, double& z) override {}
 
 }; 
 
-// // AppCodebaseMethod Function that takes a pointer to an object that implements the AppInterface as input.
-// // We are essentially calling a function within the app code base and passing it an object that adheres to 
-// // the app interface 
-// void AppCodebaseMethod(AppInterface* obj) {}

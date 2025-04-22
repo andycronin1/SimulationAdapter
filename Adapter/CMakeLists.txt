@@ -12,7 +12,7 @@ message(STATUS "BULLET_LIBRARIES: ${BULLET_LIBRARIES}")
 execute_process(COMMAND ls -l ${BULLET_INCLUDE_DIRS}/LinearMath/btVector3.h OUTPUT_VARIABLE FILE_INFO)
 message(STATUS "File Info: ${FILE_INFO}")
 
-add_executable(myAdapter main.cpp)
+add_executable(myAdapter main.cpp adapter.cpp)
 
 # Be explicit about including the LinearMath directory
 target_include_directories(myAdapter PRIVATE

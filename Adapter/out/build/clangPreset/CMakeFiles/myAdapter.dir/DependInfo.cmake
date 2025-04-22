@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/Users/ajcronin/cppProjects/cmakeAdapter/Adapter/adapter.cpp" "CMakeFiles/myAdapter.dir/adapter.cpp.o" "gcc" "CMakeFiles/myAdapter.dir/adapter.cpp.o.d"
   "/Users/ajcronin/cppProjects/cmakeAdapter/Adapter/main.cpp" "CMakeFiles/myAdapter.dir/main.cpp.o" "gcc" "CMakeFiles/myAdapter.dir/main.cpp.o.d"
   )
 

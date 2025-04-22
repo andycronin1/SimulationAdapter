@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/myAdapter.dir/adapter.cpp.o"
+  "CMakeFiles/myAdapter.dir/adapter.cpp.o.d"
   "CMakeFiles/myAdapter.dir/main.cpp.o"
   "CMakeFiles/myAdapter.dir/main.cpp.o.d"
   "myAdapter"
