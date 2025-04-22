@@ -10,6 +10,7 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 CMakeUserPresets.json
+build
 
 # Prerequisites
 *.d
@@ -44,9 +45,13 @@ CMakeUserPresets.json
 *.out
 *.app
 
+<<<<<<< HEAD
 # OS generated files #
 ######################
 /.DS_Store
 ## This one might be better
 # **/.DS_Store
+=======
+.DS_Store
+>>>>>>> main
 .DS_Store
