@@ -5,8 +5,8 @@
 class AppInterface 
 {
     public: 
-    
 
+        virtual ~AppInterface() = default; // Virtual destructor
         virtual void testSim() = 0; 
         virtual void createBoxRigidBody(double& x, double& y, double& z) = 0; //pure virtual function
         virtual void showObjectPositions() = 0; 

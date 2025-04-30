@@ -7,22 +7,6 @@ Bullet3Adapter::Bullet3Adapter(std::shared_ptr<btDiscreteDynamicsWorld>& simulat
     std::cout << "Adapter Created\n";
 }
 
-// METHOD FOR STARTING SIMULATION IF WE WANT TO START THE SIM FROM INSIDE THE ADAPTER
-// void Bullet3Adapter::startSim(){
-//     // 1. Create the necessary components:
-//     btDefaultCollisionConfiguration* collisionConfiguration = new btDefaultCollisionConfiguration();
-//     btCollisionDispatcher* dispatcher = new btCollisionDispatcher(collisionConfiguration);
-//     btDbvtBroadphase* overlappingPairCache = new btDbvtBroadphase();
-//     btSequentialImpulseConstraintSolver* solver = new btSequentialImpulseConstraintSolver;
-
-//     // 2. Create btDiscreteDynamicsWorld using the components. Reset the pointer as it is initally a null pointer
-//     simworld.reset(new btDiscreteDynamicsWorld(dispatcher, overlappingPairCache, solver, collisionConfiguration));
-
-//     std::cout << "Bullet sim world created";
-
-// }
-
-
 void Bullet3Adapter::testSim() {
     if (sim) {
         std::cout << "Simulation world exists.\n";

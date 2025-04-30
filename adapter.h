@@ -11,8 +11,9 @@ class Bullet3Adapter : public AppInterface {
 
         // Constructor for Bullet 3 adapter which takes in a pointer to btDiscreteDynamicsWorld (bullet physics world)
         Bullet3Adapter(std::shared_ptr<btDiscreteDynamicsWorld>& simulation);
-        
 
+        // ----------- Functions are defined below ---------- // 
+        
         // Defining virtual function to be overridden from app interface 
         virtual void testSim() override;
 
@@ -31,3 +32,13 @@ class Bullet3Adapter : public AppInterface {
         std::vector<std::unique_ptr<btRigidBody>> rigidBodies_;
 
 };
+
+// class airSimAdapter : public AppInterface {
+
+//     public:
+
+//         // Constructor for AirSim adapter 
+//         airSimAdapter();
+
+// };
+
