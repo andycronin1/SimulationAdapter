@@ -63,14 +63,16 @@ else()
     message(WARNING "libAirLib.a not found in ${AIRSIM_LIB_DIR}")
 endif()
 
-add_executable(myAdapter main.cpp bulletAdapter.cpp)
+add_executable(myAdapter src/main.cpp src/bulletAdapter.cpp)
 
 # Include directories
-target_include_directories(myAdapter PRIVATE
+target_include_directories(myAdapter PUBLIC
     ${BULLET_INCLUDE_DIRS}
     ${RPCLIB_INCLUDE_DIR}
     ${EIGEN_INCLUDE_DIR}
     ${AIRSIM_INCLUDE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 # Link libraries
