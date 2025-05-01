@@ -9,9 +9,9 @@ set(AIRSIM_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/AirSim)
 set(RPCLIB_INCLUDE_DIR ${AIRSIM_ROOT}/AirLib/deps/rpclib/include)
 set(EIGEN_INCLUDE_DIR ${AIRSIM_ROOT}/AirLib/deps/eigen3)
 set(AIRSIM_INCLUDE_DIR ${AIRSIM_ROOT}/AirLib/include)
-set(MAVLINKCOM_LIB_DIR ${AIRSIM_ROOT}/AirLib/deps/MavLinkCom/lib/) # Adjusted for macOS
-set(RPCLIB_LIB_DIR ${AIRSIM_ROOT}/AirLib/deps/rpclib/lib)        # Adjusted for macOS
-set(AIRSIM_LIB_DIR ${AIRSIM_ROOT}/AirLib/lib)             # Adjusted for macOS
+set(MAVLINKCOM_LIB_DIR ${AIRSIM_ROOT}/AirLib/deps/MavLinkCom/lib/) 
+set(RPCLIB_LIB_DIR ${AIRSIM_ROOT}/AirLib/deps/rpclib/lib)        
+set(AIRSIM_LIB_DIR ${AIRSIM_ROOT}/AirLib/lib)            
 
 # Debugging messages
 message(STATUS "BULLET_FOUND: ${BULLET_FOUND}")
@@ -63,7 +63,7 @@ else()
     message(WARNING "libAirLib.a not found in ${AIRSIM_LIB_DIR}")
 endif()
 
-add_executable(myAdapter src/main.cpp src/bulletAdapter.cpp)
+add_executable(myAdapter app/main.cpp src/bulletAdapter.cpp)
 
 # Include directories
 target_include_directories(myAdapter PUBLIC
