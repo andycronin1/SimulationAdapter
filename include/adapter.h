@@ -18,7 +18,7 @@ class Bullet3Adapter : public AppInterface {
         virtual void testSim() override;
 
         // Defining virtual function to be overridden from app interface 
-        virtual void createBoxRigidBody(double& x, double& y, double& z) override;
+        virtual void createBoxRigidBody(double x, double y, double z) override;
 
         // Function to show object positions
         virtual void showObjectPositions() override;

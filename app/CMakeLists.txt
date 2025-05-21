@@ -1,6 +1,13 @@
 # Create the executable and link the library
 add_executable(myAdapter main.cpp)
 
+# Surpress CMake policy CMP0167
+# This policy is set to OLD to avoid issues with Boost
+cmake_policy(SET CMP0167 OLD)
+find_package(Boost REQUIRED COMPONENTS system thread)
+find_package(nlohmann_json REQUIRED)
+
+
 # AirSim dependencies
 set(AIRSIM_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/../AirSim)
 set(RPCLIB_INCLUDE_DIR ${AIRSIM_ROOT}/AirLib/deps/rpclib/include)
@@ -37,4 +44,7 @@ bulletAdapter
 ${MAVLINKCOM_LIB_DIR}/libMavLinkCom.a
 ${RPCLIB_LIB_DIR}/librpc.a
 ${AIRSIM_LIB_DIR}/libAirLib.a
+Boost::system 
+Boost::thread
+nlohmann_json::nlohmann_json
 )
