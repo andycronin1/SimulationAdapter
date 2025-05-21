@@ -8,7 +8,7 @@ class AppInterface
 
         virtual ~AppInterface() = default; // Virtual destructor
         virtual void testSim() = 0; 
-        virtual void createBoxRigidBody(double& x, double& y, double& z) = 0; //pure virtual function
+        virtual void createBoxRigidBody(double x, double y, double z) = 0; //pure virtual function
         virtual void showObjectPositions() = 0; 
         virtual void applyForce(int x, int y, int z, int object_num) = 0; 
         
@@ -25,7 +25,7 @@ class AppObject : public AppInterface
         virtual void testSim() override {}    
 
         // Method to create box rigid body
-        virtual void createBoxRigidBody(double& x, double& y, double& z) override {}
+        virtual void createBoxRigidBody(double x, double y, double z) override {}
 
         virtual void showObjectPositions() override {}
 

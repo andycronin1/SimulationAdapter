@@ -19,7 +19,7 @@ void Bullet3Adapter::testSim() {
 
 
 // Function to create box rigid body (overrides the appInterface method)
-void Bullet3Adapter::createBoxRigidBody(double& x, double& y, double& z) {
+void Bullet3Adapter::createBoxRigidBody(double x, double y, double z) {
 
     auto groundShape = std::make_shared<btBoxShape>(btVector3(x, y, z));
     auto groundMotionState = std::make_shared<btDefaultMotionState>(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -56, 0)));

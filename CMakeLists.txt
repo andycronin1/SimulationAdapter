@@ -6,3 +6,5 @@ find_package(Bullet REQUIRED)
 
 add_subdirectory(src)
 add_subdirectory(app)
+
+
