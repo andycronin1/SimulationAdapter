@@ -11,7 +11,6 @@
 #include <boost/beast/version.hpp>
 #include <boost/asio/ip/tcp.hpp>
 #include <boost/asio/signal_set.hpp>
-
 #include "common/common_utils/StrictMode.hpp"
 STRICT_MODE_OFF
 #ifndef RPCLIB_MSGPACK
@@ -19,7 +18,6 @@ STRICT_MODE_OFF
 #endif // !RPCLIB_MSGPACK
 #include "rpc/rpc_error.h"
 STRICT_MODE_ON
-
 #include "vehicles/car/api/CarRpcLibClient.hpp"
 #include "common/common_utils/FileSystem.hpp"
 
@@ -74,6 +72,7 @@ int main() {
     bulletSim->setGravity(btVector3(0, -10, 0));
     // Create the Bullet3Adapter, passing the simulation world pointer to its constructor  
     auto bullet3Adapter = Bullet3Adapter(bulletSim);
+    std::cout << "Bullet simulation and adapter set up complete.\n";
 
     // ---- Start HTTP server ----
     try {
